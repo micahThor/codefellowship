@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Home</title>
-</head>
-<body>
-<h1>Home</h1>
-<h2>Welcome back, [[${userName}]]</h2>
-<a href="/signup">Sign Up</a>
-<a href="/login">Log In</a>
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>CodeFellowship Home</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <header>
+        <h2 class="CurrentLoggedInUserName">User: [[${userName}]]</h2>
+        <a href="/logout" class="CurrentLoggedInUserName">Log out</a>
+    </header>
+    <body>
+        <h1>CodeFellowship - A Place For Friends</h1>
+        <nav>
+            <li><a href="/signup">Sign Up</a></li>
+            <li><a href="/login">Log In</a></li>
+        </nav>
+    </body>
 </html>
