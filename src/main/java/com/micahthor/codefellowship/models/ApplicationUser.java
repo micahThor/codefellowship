@@ -23,11 +23,11 @@ public class ApplicationUser implements UserDetails {
 
     private String firstName;
     private String lastName;
-    private Date dateOfBirth;
+    private String dateOfBirth;
     private String bio;
     private URL profilePicture;
 
-    public ApplicationUser(String userName, String password, String firstName, String lastName, Date dateOfBirth, String bio, URL profilePicture) {
+    public ApplicationUser(String userName, String password, String firstName, String lastName, String dateOfBirth, String bio, URL profilePicture) {
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
@@ -45,7 +45,7 @@ public class ApplicationUser implements UserDetails {
         return lastName;
     }
 
-    public Date getDateOfBirth() {
+    public String getDateOfBirth() {
         return dateOfBirth;
     }
 

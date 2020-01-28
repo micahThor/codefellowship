@@ -26,12 +26,15 @@ public class ApplicationUserController {
         return "login";
     }
 
+    @GetMapping("/signup")
+    public String showSignUpPage() {
+        return "signup";
+    }
+
     @PostMapping("/signup")
-    public RedirectView createUser(String userName, String password, String firstName, String lastName, Date dateOfBirth, String bio, URL profilePicture) {
-
-        password = passwordEncoder.encode(password);
-
-        ApplicationUser newUser = new ApplicationUser(userName, password, firstName, lastName, dateOfBirth, bio, profilePicture);
+    public RedirectView createUser(String userName, String password, String firstName, String lastName, String dateOfBirth, String bio, URL profilePicture) {;
+        System.out.println("made it");
+        ApplicationUser newUser = new ApplicationUser(userName, passwordEncoder.encode(password), firstName, lastName, dateOfBirth, bio, profilePicture);
 
         userRepository.save(newUser);
 
