@@ -37,6 +37,8 @@ public class ApplicationUser implements UserDetails {
         this.profilePicture = profilePicture;
     }
 
+    public ApplicationUser() {}
+
     public String getFirstName() {
         return firstName;
     }
