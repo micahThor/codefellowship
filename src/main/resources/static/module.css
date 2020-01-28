@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
+nav {
+    list-style-type: none;
+}
+
+li {
+    display: inline;
+    margin: 1.5em;
+}
+
+/*
+        TEXT & FONT
+*/
+h1, h2, nav, a {
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 26px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+p {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 16px;
+}
