@@ -33,7 +33,7 @@ public class ApplicationUserController {
 
     @PostMapping("/signup")
     public RedirectView createUser(String userName, String password, String firstName, String lastName, String dateOfBirth, String bio, URL profilePicture) {;
-        System.out.println("made it");
+
         ApplicationUser newUser = new ApplicationUser(userName, passwordEncoder.encode(password), firstName, lastName, dateOfBirth, bio, profilePicture);
 
         userRepository.save(newUser);
