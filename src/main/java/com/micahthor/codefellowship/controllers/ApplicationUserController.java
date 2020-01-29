@@ -2,6 +2,8 @@ package com.micahthor.codefellowship.controllers;
 
 import com.micahthor.codefellowship.models.ApplicationUser;
 import com.micahthor.codefellowship.models.ApplicationUserRepository;
+import com.micahthor.codefellowship.models.Post;
+import com.micahthor.codefellowship.models.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import java.net.URL;
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 public class ApplicationUserController {
@@ -23,6 +26,9 @@ public class ApplicationUserController {
 
     @Autowired
     ApplicationUserRepository userRepository;
+
+    @Autowired
+    PostRepository postRepository;
 
     @GetMapping("/login")
     public String index(Model m, Principal p) {
@@ -63,10 +69,16 @@ public class ApplicationUserController {
     @GetMapping("/userProfile")
     public String showUserProfileDetails(Model m, Principal p) {
 
-        // if user accesses route with login
+        // if user accesses route with authenticated login
         if (p != null) {
+            // make user details available to page
             ApplicationUser loggedInUser = userRepository.findByUserName(p.getName());
             m.addAttribute("user", loggedInUser);
+
+            // make post list available to page
+            List<Post> postList = postRepository.findByApplicationUserId(loggedInUser.getId());
+            m.addAttribute("posts", postList);
+
             return "userProfile";
         }
 

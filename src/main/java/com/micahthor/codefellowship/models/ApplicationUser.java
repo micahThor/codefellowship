@@ -3,20 +3,21 @@ package com.micahthor.codefellowship.models;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.net.URL;
 import java.util.Collection;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 public class ApplicationUser implements UserDetails {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
+    private long id;
+
+    @OneToMany(mappedBy = "applicationUser")
+    private List<Post> posts;
 
     private String userName;
     private String password;
@@ -57,6 +58,18 @@ public class ApplicationUser implements UserDetails {
 
     public URL getProfilePicture() {
         return profilePicture;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public String getUserName() {
+        return userName;
     }
 
     @Override
