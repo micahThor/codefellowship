@@ -5,11 +5,14 @@
     <title>Sign Up</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<header>
-    <h2 class="CurrentLoggedInUserName">User: [[${userName}]]</h2>
-    <a href="/logout" class="CurrentLoggedInUserName">Log out</a>
-</header>
+
 <body>
+
+    <header>
+        <h2 class="CurrentLoggedInUserName">User: [[${userName}]]</h2>
+        <a href="/logout" class="CurrentLoggedInUserName">Log out</a>
+    </header>
+
     <form action="/signup" method="POST">
 
         <p>Name                   <input type="text" name="userName"></p>
