@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
@@ -27,6 +27,18 @@
             <p>Bio:        [[${user.bio}]]</p>
 
             <img th:src="${user.profilePicture}">
+
+            <form action="/writePost" method="POST">
+                <p>Write A Post:  <input type="text" name="body"></p>
+                <input type="submit">
+            </form>
+
+            <ul>
+                <li th:each="post : ${posts}">
+                    <p>Post:           <span th:text="${post.body}"></span></p>
+                    <p>Time Posted:    <span th:text="${post.timestamp}"></span></p>
+                </li>
+            </ul>
         </main>
 
     </body>
