@@ -11,7 +11,7 @@ Project dependencies include *Thymeleaf*, *Spring Web*, *Spring Devtools*, *Java
      /userProfile : Displays user's profile data and posts
      
     
-#### How to **run** Songr:
+#### How to **run** CodeFellowship App:
   1. Clone this repo.
   2. Navigate terminal to repo folder location on local machine.
   3. Enter *./gradlew BootRun*
