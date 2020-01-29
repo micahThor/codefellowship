@@ -5,9 +5,10 @@
 Project dependencies include *Thymeleaf*, *Spring Web*, *Spring Devtools*, *Java Persistence API*, *Postgres*, and *Spring Security*.  
 
 #### This project contains these **routes**:  
-     /           : Home route.  Displays currently logged in user and navigation to log in or sign up.
-     /login      : Login route.  Displays a form for registered users to log in.
-     /signup     : Signup route.  Displays a form for users to sign up to the application.
+     /            : Displays currently logged in user and navigation to log in or sign up.
+     /login       : Displays a form for registered users to log in.
+     /signup      : Displays a form for users to sign up to the application.  
+     /userProfile : Displays user's profile data and posts
      
     
 #### How to **run** Songr:
