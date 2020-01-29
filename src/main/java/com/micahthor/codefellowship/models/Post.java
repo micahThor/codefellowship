@@ -1,7 +1,6 @@
 package com.micahthor.codefellowship.models;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 public class Post {
@@ -16,10 +15,10 @@ public class Post {
     private String body;
     private String timestamp;
 
-    public Post(ApplicationUser applicationUser, String body, LocalDateTime timestamp) {
+    public Post(ApplicationUser applicationUser, String body, String timestamp) {
         this.applicationUser = applicationUser;
         this.body = body;
-        this.timestamp = timestamp.toString();
+        this.timestamp = timestamp;
     }
 
     public Post() {

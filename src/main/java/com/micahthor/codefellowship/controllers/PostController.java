@@ -11,6 +11,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class PostController {
@@ -24,7 +25,10 @@ public class PostController {
     @PostMapping("/writePost")
     public RedirectView writePost(Principal p, String body) {
 
-        LocalDateTime now = LocalDateTime.now();
+        // https://mkyong.com/java8/java-8-how-to-format-localdatetime/
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+        String now = LocalDateTime.now().format(formatter);
 
         if (p != null) {
             ApplicationUser user = userRepository.findByUserName(p.getName());
