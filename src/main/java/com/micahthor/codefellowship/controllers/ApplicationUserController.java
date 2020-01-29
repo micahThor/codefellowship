@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
 import java.net.URL;
 import java.security.Principal;
 
@@ -43,11 +45,17 @@ public class ApplicationUserController {
     }
 
     @PostMapping("/signup")
-    public RedirectView createUser(String userName, String password, String firstName, String lastName, String dateOfBirth, String bio, URL profilePicture) {;
+    public RedirectView createUser(HttpServletRequest request, String userName, String password, String firstName, String lastName, String dateOfBirth, String bio, URL profilePicture) {;
 
         ApplicationUser newUser = new ApplicationUser(userName, passwordEncoder.encode(password), firstName, lastName, dateOfBirth, bio, profilePicture);
 
         userRepository.save(newUser);
+
+        try {
+            request.login(userName, password);
+        } catch (ServletException e) {
+            e.printStackTrace();
+        }
 
         return new RedirectView("/");
     }
@@ -55,11 +63,14 @@ public class ApplicationUserController {
     @GetMapping("/userProfile")
     public String showUserProfileDetails(Model m, Principal p) {
 
+        // if user accesses route with login
         if (p != null) {
             ApplicationUser loggedInUser = userRepository.findByUserName(p.getName());
             m.addAttribute("user", loggedInUser);
+            return "userProfile";
         }
 
-        return "userProfile";
+        // if user accesses route without login
+        return "login";
     }
 }
