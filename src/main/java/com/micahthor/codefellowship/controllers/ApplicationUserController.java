@@ -24,6 +24,7 @@ public class ApplicationUserController {
 
     @GetMapping("/login")
     public String index(Model m, Principal p) {
+
         if (p != null) {
             m.addAttribute("userName", p.getName());
         }
@@ -49,5 +50,16 @@ public class ApplicationUserController {
         userRepository.save(newUser);
 
         return new RedirectView("/");
+    }
+
+    @GetMapping("/userProfile")
+    public String showUserProfileDetails(Model m, Principal p) {
+
+        if (p != null) {
+            ApplicationUser loggedInUser = userRepository.findByUserName(p.getName());
+            m.addAttribute("user", loggedInUser);
+        }
+
+        return "userProfile";
     }
 }
