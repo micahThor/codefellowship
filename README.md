@@ -18,7 +18,10 @@ Project dependencies include *Thymeleaf*, *Spring Web*, *Spring Devtools*, *Java
   3. Enter *./gradlew BootRun*
   4. Open web browser of choice
   5. Navigate to *http://localhost:8080*
-  6. Visit each page by appending route names above.
+  6. Create a profile
+  7. Write posts on your profile
+  8. Visit other user's profiles and add them to view their feed
+  9. Make friends!
 
 ## LAB 16 : 28 JAN 2020  
 - The site should have a splash page at the root route (/) that contains basic information about the site, as well as a link to the “sign up” page.  
