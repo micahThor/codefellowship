@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.net.URL;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class ApplicationUser implements UserDetails {
@@ -15,6 +16,17 @@ public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToMany
+    @JoinTable(
+            name="friends",
+            joinColumns = @JoinColumn(name="registered_user"),
+            inverseJoinColumns = @JoinColumn(name="friends_followed")
+    )
+    private Set<ApplicationUser> friendsThatIAmFollowing;
+
+    @ManyToMany(mappedBy = "friendsThatIAmFollowing")
+    private Set<ApplicationUser> friendsThatAreFollowingMe;
 
     @OneToMany(mappedBy = "applicationUser")
     private List<Post> posts;
@@ -39,6 +51,10 @@ public class ApplicationUser implements UserDetails {
     }
 
     public ApplicationUser() {}
+
+    public void followAFriend(ApplicationUser userToFollow) {
+        friendsThatIAmFollowing.add(userToFollow);
+    }
 
     public String getFirstName() {
         return firstName;
@@ -70,6 +86,14 @@ public class ApplicationUser implements UserDetails {
 
     public String getUserName() {
         return userName;
+    }
+
+    public Set<ApplicationUser> getFriendsThatIAmFollowing() {
+        return friendsThatIAmFollowing;
+    }
+
+    public Set<ApplicationUser> getFriendsThatAreFollowingMe() {
+        return friendsThatAreFollowingMe;
     }
 
     @Override
