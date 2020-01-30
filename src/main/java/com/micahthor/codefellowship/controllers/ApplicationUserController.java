@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.net.URL;
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 
 @Controller
 public class ApplicationUserController {
@@ -80,6 +82,51 @@ public class ApplicationUserController {
             m.addAttribute("posts", postList);
 
             return "userProfile";
+        }
+
+        // if user accesses route without login
+        return "login";
+    }
+
+    @GetMapping("/visitFriend")
+    public String displayRegisteredUserProfile(String userName, Model m, Principal p) {
+
+        if (p != null) {
+            // make user details available to page
+            ApplicationUser loggedInUser = userRepository.findByUserName(p.getName());
+            m.addAttribute("loggedInUser", loggedInUser);
+
+            ApplicationUser userToVisit = userRepository.findByUserName(userName);
+            m.addAttribute("user", userToVisit);
+            return "friendPage";
+        }
+
+        // if user accesses route without login
+        return "login";
+    }
+
+    @PostMapping("/followFriend")
+    public RedirectView followFriend(String userNameToFollow, Principal p) {
+
+        if (p != null) {
+            ApplicationUser userToFollow = userRepository.findByUserName(userNameToFollow);
+            ApplicationUser loggedInUser = userRepository.findByUserName(p.getName());
+            loggedInUser.followAFriend(userToFollow);
+
+            userRepository.save(loggedInUser);
+        }
+        return new RedirectView("/");
+    }
+
+    @GetMapping("/feed")
+    public String viewFeed(Principal p, Model m) {
+
+        if (p != null) {
+            ApplicationUser registeredUser = userRepository.findByUserName(p.getName());
+            Set<ApplicationUser> friends = registeredUser.getFriendsThatIAmFollowing();
+            m.addAttribute("friends", friends);
+
+            return "feed";
         }
 
         // if user accesses route without login

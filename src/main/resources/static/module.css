@@ -9,16 +9,29 @@ li {
     margin: 1.5em;
 }
 
+.users {
+    display: block;
+}
+
+.indexProfilePic {
+    height: 25%;
+    width: 25%;
+}
+
 /*
         TEXT & FONT
 */
 h1, h2, nav, a {
     font-family: 'Source Sans Pro', sans-serif;
+}
+
+nav {
     text-align: center;
 }
 
 h1 {
     font-size: 26px;
+    text-align: center;
 }
 
 h2 {

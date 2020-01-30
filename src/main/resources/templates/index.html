@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <title>CodeFellowship Home</title>
@@ -15,8 +15,26 @@
             <li><a href="/signup">Sign Up</a></li>
             <li><a href="/login">Log In</a></li>
             <li><a href="/userProfile">My Profile</a></li>
+            <li><a href="/feed">My Feed</a></li>
         </nav>
     </header>
+
+    <main>
+    <h2>Make a new friend</h2>
+        <ul>
+            <li class="users" th:each="user : ${registeredUsers}">
+                <img class="indexProfilePic" th:src="${user.profilePicture}">
+                [[${user.firstName}]] [[${user.lastName}]]
+
+
+                <form action="/visitFriend" method="GET">
+                    <input type="hidden" th:value="${user.userName}" name="userName">
+                    <input type="submit" value="Visit Profile">
+                </form>
+
+            </li>
+        </ul>
+    </main>
 
     </body>
 </html>
