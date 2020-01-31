@@ -1,39 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <title>Profile</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
 
-<body>
-<header>
-    <h2 class="CurrentLoggedInUserName">User: [[${loggedInUser.userName}]]</h2>
-    <a href="/logout" class="CurrentLoggedInUserName">Log out</a>
-</header>
+    <body>
+        <header th:insert="fragments/header.html :: header"></header>
 
-<main>
-    <h1>CodeFellowship - A Place For Friends</h1>
-    <nav>
-        <li><a href="/">Home</a></li>
-        <li><a href="/signup">Sign Up</a></li>
-        <li><a href="/login">Log In</a></li>
-        <li><a href="/userProfile">My Profile</a></li>
-        <li><a href="/feed">My Feed</a></li>
-    </nav>
+        <main>
+            <div th:insert="fragments/userBasicDetails.html:: basicUserDetails"></div>
 
-    <p>First Name: [[${user.firstName}]]</p>
-    <p>Last Name:  [[${user.lastName}]]</p>
-    <p>Birthday:   [[${user.dateOfBirth}]]</p>
-    <p>Bio:        [[${user.bio}]]</p>
+            <img th:src="${user.profilePicture}">
+            <form action="/followFriend" method="POST">
+                <input type="hidden" th:value="${user.userName}" name="userNameToFollow">
+                <input type="submit" value="Follow">
+            </form>
+        </main>
 
-    <img th:src="${user.profilePicture}">
-    <form action="/followFriend" method="POST">
-        <input type="hidden" th:value="${user.userName}" name="userNameToFollow">
-        <input type="submit" value="Follow">
-    </form>
-
-</main>
-
-</body>
+    </body>
 </html>

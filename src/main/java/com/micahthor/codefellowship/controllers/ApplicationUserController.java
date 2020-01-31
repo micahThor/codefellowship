@@ -76,6 +76,7 @@ public class ApplicationUserController {
             // make user details available to page
             ApplicationUser loggedInUser = userRepository.findByUserName(p.getName());
             m.addAttribute("user", loggedInUser);
+            m.addAttribute("userName", loggedInUser.getUserName());
 
             // make post list available to page
             List<Post> postList = postRepository.findByApplicationUserId(loggedInUser.getId());
@@ -95,6 +96,7 @@ public class ApplicationUserController {
             // make user details available to page
             ApplicationUser loggedInUser = userRepository.findByUserName(p.getName());
             m.addAttribute("loggedInUser", loggedInUser);
+            m.addAttribute("userName", loggedInUser.getUserName());
 
             ApplicationUser userToVisit = userRepository.findByUserName(userName);
             m.addAttribute("user", userToVisit);
@@ -123,6 +125,7 @@ public class ApplicationUserController {
 
         if (p != null) {
             ApplicationUser registeredUser = userRepository.findByUserName(p.getName());
+            m.addAttribute("userName", registeredUser.getUserName());
             Set<ApplicationUser> friends = registeredUser.getFriendsThatIAmFollowing();
             m.addAttribute("friends", friends);
 
