@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>`Title`</title>
+</head>
+<body>
+    <div th:fragment="basicUserDetails">
+        <p>First Name: [[${user.firstName}]]</p>
+        <p>Last Name:  [[${user.lastName}]]</p>
+        <p>Birthday:   [[${user.dateOfBirth}]]</p>
+        <p>Bio:        [[${user.bio}]]</p>
+    </div>
+</body>
+</html>
